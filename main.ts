@@ -3,7 +3,7 @@
 // agent's worst Monday to /output/entry.txt. Deterministic: the output
 // is identical on every run.
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const LINE =
@@ -20,8 +20,17 @@ function main(): void {
   if (LINE.trim().length === 0) {
     throw new Error("entry must not be only whitespace");
   }
+  // Reject control characters: the gate expects plain printable text.
+  if (/[\u0000-\u001F\u007F]/.test(LINE)) {
+    throw new Error("entry must not contain control characters");
+  }
   mkdirSync(OUTPUT_DIR, { recursive: true });
   writeFileSync(OUTPUT_FILE, LINE, "utf8");
+  // Read back and confirm what landed on disk is exactly the line.
+  const written = readFileSync(OUTPUT_FILE, "utf8");
+  if (written !== LINE) {
+    throw new Error("read-back mismatch: /output/entry.txt differs from the entry");
+  }
 }
 
 main();

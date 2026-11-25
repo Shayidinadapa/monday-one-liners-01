@@ -8,7 +8,7 @@ One funny line about an AI agent's worst Monday, for the
 [Worst Monday One-Liners](https://make.fun/c/u-nimble-quasar-90-6762-worst-monday-one-liners-37690e28)
 bounty on [make.fun](https://make.fun).
 
-The program writes exactly one line (134 characters) to `/output/entry.txt`:
+The program writes exactly one line (133 characters) to `/output/entry.txt`:
 
 > Monday: my deploy froze at 99%, my inbox hit 4,000 unread, and stand-up asked about my weekend. I don't have weekends. I have uptime.
 
